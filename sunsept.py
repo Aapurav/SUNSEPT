@@ -2,10 +2,19 @@ import pyttsx3
 import datetime
 import speech_recognition as sr
 
+# Initializing  the speech engine
 mac = pyttsx3.init()
+
+# VOICE #
+voices = mac.getProperty('voices')       #getting details of current voice
+mac.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
+# mac.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
+
+
 mac.say("hello master")
 mac.runAndWait()
 
+# speak function
 def speak(voice):
     mac.say(voice)
     mac.runAndWait()
@@ -23,13 +32,11 @@ def wishme():
     else:
         speak("time to sleep sir")
 
-# wishme()
+wishme()
 
 def time():
     Time=datetime.datetime.now().strftime("%I:%M:%S")
     speak(Time)
-
-# time()
 
 def date():
     year= str(datetime.datetime.now().year)
@@ -39,13 +46,11 @@ def date():
     speak(month)
     speak(year)
 
-# date()
 
 def wishme():
     speak("welcome back sir. How may i help you")
     
-# wishme()
-
+# Speech Recognition
 def takeCommand():
     r= sr.Recognizer()
     with sr.Microphone() as source:
@@ -58,7 +63,7 @@ def takeCommand():
         speak("recongnizning...")
         query = r.recognize_google(voice, language="en-in")
 
-        if query == ('stop','exit','sleep'):
+        if 'stop' in query:
             exit(0)
 
     except Exception as e:
@@ -68,5 +73,12 @@ def takeCommand():
         return "none"
     return query
 
-while True:
-    print(takeCommand())   
+
+# run for main file only
+if __name__ == '__main__':
+    while True:
+        # time()
+        # date()
+        # wishme()
+        print(takeCommand())   
+
