@@ -2,14 +2,16 @@ import pyttsx3
 import datetime
 import speech_recognition as sr
 
-mac =pyttsx3.init()
+mac = pyttsx3.init()
 mac.say("hello master")
 mac.runAndWait()
 
 def speak(voice):
     mac.say(voice)
     mac.runAndWait()
+
 speak("this is SUNSEPT")
+
 def wishme():
     hour =(datetime.datetime.now().hour)
     if hour>=6 and hour<12:
@@ -20,27 +22,29 @@ def wishme():
         speak("good evening sir")
     else:
         speak("time to sleep sir")
-wishme()
+
+# wishme()
 
 def time():
     Time=datetime.datetime.now().strftime("%I:%M:%S")
     speak(Time)
-time()
+
+# time()
 
 def date():
-    year= (datetime.datetime.now().year)
-    month=(datetime.datetime.now().month)
-    date=(datetime.datetime.now().day)
+    year= str(datetime.datetime.now().year)
+    month= str(datetime.datetime.now().month)
+    date= str(datetime.datetime.now().day)
     speak(date)
     speak(month)
     speak(year)
 
-date()
+# date()
 
 def wishme():
     speak("welcome back sir. How may i help you")
     
-wishme()
+# wishme()
 
 def takeCommand():
     r= sr.Recognizer()
@@ -53,11 +57,16 @@ def takeCommand():
         print("recongnizning...")
         speak("recongnizning...")
         query = r.recognize_google(voice, language="en-in")
-        print(query)
+
+        if query == ('stop','exit','sleep'):
+            exit(0)
+
     except Exception as e:
         print(e)
         speak("Master! please repeat again....")
 
         return "none"
     return query
-takeCommand()   
+
+while True:
+    print(takeCommand())   
