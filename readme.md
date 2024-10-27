@@ -13,16 +13,3 @@ SunsEPT is an advanced AI-powered assistant designed to simplify and enhance the
 - **Customizable Settings**: Tailor the assistant's responses, voice, and behavior to match your preferences.
 
 ## Getting Started
-
-### Prerequisites
-
-- **Operating System**: Windows 10, macOS, or a compatible Linux distribution
-- **Python**: Version 3.8 or above
-- **Pip**: Ensure you have pip installed for dependency management
-- **Dependencies**:
-  - `speech_recognition`
-  - `pyttsx3`
-  - `openai`
-  - `pyaudio`
-  - `datetime`
-  - `pyautogui`
