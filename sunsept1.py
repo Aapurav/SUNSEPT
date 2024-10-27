@@ -31,7 +31,6 @@ def wishme():
         speak("good evening sir")
     else:
         speak("time to sleep sir")
-
 wishme()
 
 def time():
@@ -49,7 +48,7 @@ def date():
 
 def wishme():
     speak("welcome back sir. How may i help you")
-    
+
 # Speech Recognition
 def takeCommand():
     r= sr.Recognizer()
@@ -81,6 +80,3 @@ if __name__ ==  "__main__":
     wishme()
     while True:
         takeCommand()   
-
-
-
