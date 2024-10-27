@@ -7,8 +7,8 @@ mac = pyttsx3.init()
 
 # VOICE #
 voices = mac.getProperty('voices')       #getting details of current voice
-mac.setProperty('voice', voices[1].id)  #changing index, changes voices. o for male
-# mac.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
+# mac.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
+mac.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
 
 
 mac.say("hello master")
@@ -73,11 +73,14 @@ def takeCommand():
         return "none"
     return query
 
-time()
-date()
-wishme()
-takeCommand()   
-
 
 # run for main file only
+if __name__ ==  "__main__":
+    time()
+    date()
+    wishme()
+    while True:
+        takeCommand()   
+
+
 
