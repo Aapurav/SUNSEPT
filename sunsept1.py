@@ -63,7 +63,7 @@ def takeCommand():
         speak("recongnizning...")
         query = r.recognize_google(voice, language="en-in")
 
-        if 'stop'== query:
+        if 'stop'in query:
             exit(0)
 
     except Exception as e:
@@ -73,12 +73,11 @@ def takeCommand():
         return "none"
     return query
 
+time()
+date()
+wishme()
+takeCommand()   
+
 
 # run for main file only
-if __name__ == '__main__':
-    while True:
-          time()
-          date()
-          wishme()
-takeCommand() 
 
