@@ -1,6 +1,8 @@
 import pyttsx3
 import datetime
 import speech_recognition as sr
+import wikipedia 
+
 
 # Initializing  the speech engine
 mac = pyttsx3.init()
@@ -62,7 +64,7 @@ def takeCommand():
         print("recongnizning...")
         speak("recongnizning...")
         query = r.recognize_google(voice, language="en-in")
-
+        
         if 'stop'in query:
             exit(0)
 
@@ -76,8 +78,25 @@ def takeCommand():
 time()
 date()
 wishme()
-takeCommand()   
-
-
+# 
 # run for main file only
+if __name__ == '__main__':
+    while True:
+          query= takeCommand().lower()
+          print(takeCommand().lower())  
+
+          if 'time' in query:
+              time()
+          elif 'date' in query:
+              date()
+          elif 'wikipedia' in query:
+            speak("searching")
+            query= query.replace("wikipedia","")
+            result= wikipedia.summary(query, sentences = 2)
+            print(result)
+            speak(result)
+          elif 'sleep' in query:
+              quit()
+
+
 
