@@ -89,9 +89,9 @@ if __name__ == '__main__':
               time()
           elif 'date' in query:
               date()
-          elif 'wikipedia' in query:
+          elif 'wiki' in query:
             speak("searching")
-            query= query.replace("wikipedia","")
+            query= query.replace("wiki","")
             result= wikipedia.summary(query, sentences = 2)
             print(result)
             speak(result)
