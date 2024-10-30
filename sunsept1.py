@@ -75,7 +75,6 @@ def takeCommand():
         return "none"
     return query
 
-<<<<<<< HEAD
 time()
 date()
 wishme()
@@ -83,8 +82,8 @@ wishme()
 # run for main file only
 if __name__ == '__main__':
     while True:
-          query= takeCommand().lower()
-          print(takeCommand().lower())  
+          query = takeCommand().lower()
+          print(query) 
 
           if 'time' in query:
               time()
