@@ -77,29 +77,22 @@ def takeCommand():
 time()
 date()
 wishme()
-# 
+
 # run for main file only
 if __name__ == '__main__':
     while True:
-<<<<<<< HEAD
-        takeCommand()   
-=======
-          query = takeCommand().lower()
-          print(query) 
+        query = takeCommand().lower()
+        print(query) 
 
-          if 'time' in query:
-              time()
-          elif 'date' in query:
-              date()
-          elif 'wiki' in query:
+        if 'time' in query:
+            time()
+        elif 'date' in query:
+            date()
+        elif 'wiki' in query:
             speak("searching")
             query= query.replace("wiki","")
             result= wikipedia.summary(query, sentences = 2)
             print(result)
             speak(result)
-          elif 'sleep' in query:
-              quit()
-
-
-
->>>>>>> main
+        elif 'sleep' in query:
+            quit()
