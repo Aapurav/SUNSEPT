@@ -76,6 +76,13 @@ def takeCommand():
 
 # run for main file only
 if __name__ == '__main__':
+    time()
+    date()
+    wishme()
     while True:
+<<<<<<< HEAD
       print(takeCommand())   
+=======
+        print(takeCommand())   
+>>>>>>> 1fbf5fd841679ac4e452a3c42082c7fcdd5e5aed
 
