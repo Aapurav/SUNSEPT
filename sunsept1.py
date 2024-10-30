@@ -75,7 +75,6 @@ def takeCommand():
         return "none"
     return query
 
-<<<<<<< HEAD
 time()
 date()
 wishme()
