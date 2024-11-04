@@ -1,7 +1,8 @@
 import pyttsx3
 import datetime
 import speech_recognition as sr
-import wikipedia 
+import wikipedia
+import webbrowser as wb 
 
 
 # Initializing  the speech engine
@@ -82,19 +83,24 @@ wishme()
 # run for main file only
 if __name__ == '__main__':
     while True:
-          query = takeCommand().lower()
-          print(query) 
+          query= takeCommand().lower()
+          print(takeCommand().lower())  
 
           if 'time' in query:
               time()
           elif 'date' in query:
               date()
-          elif 'wiki' in query:
+          elif 'wikipedia' in query:
             speak("searching")
-            query= query.replace("wiki","")
+            query= query.replace("wikipedia","")
             result= wikipedia.summary(query, sentences = 2)
             print(result)
             speak(result)
+          elif 'chrome' in query:
+            speak("Master! what should I search?")
+            brpath="C:\Program Files\Google\Chrome\Application\chrome.exe %s"
+            search=takeCommand().lower()
+            wb.get(brpath).open_new_tab(search+".com")
           elif 'sleep' in query:
               quit()
 
