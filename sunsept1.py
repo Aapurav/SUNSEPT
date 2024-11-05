@@ -2,107 +2,95 @@ import pyttsx3
 import datetime
 import speech_recognition as sr
 import wikipedia
-import webbrowser as wb 
+import webbrowser
 
-
-# Initializing  the speech engine
+# Initialize the speech engine
 mac = pyttsx3.init()
 
-# VOICE #
-voices = mac.getProperty('voices')       #getting details of current voice
-# mac.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
-mac.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
+# Get voices and set the voice to female (index 1)
+voices = mac.getProperty('voices')
+mac.setProperty('voice', voices[1].id)
 
-
-mac.say("hello master")
-mac.runAndWait()
-
-# speak function
+# Function to speak text
 def speak(voice):
     mac.say(voice)
     mac.runAndWait()
 
-speak("this is SUNSEPT")
+speak("Hello Master! This is SUNSEPT")
 
+def prt(txt):
+    speak(txt)
+    print(txt)
+
+# Greet based on the time of the day
 def wishme():
-    hour =(datetime.datetime.now().hour)
-    if hour>=6 and hour<12:
-        speak("good morning sir")
-    elif hour>=12 and hour<18:
-        speak("good afternoon sir")
-    elif hour>=18 and hour<24:
-        speak("good evening sir")
+    hour = datetime.datetime.now().hour
+    if 6 <= hour < 12:
+        speak("Good morning sir.")
+    elif 12 <= hour < 18:
+        speak("Good afternoon sir.")
+    elif 18 <= hour < 24:
+        speak("Good evening sir.")
     else:
-        speak("time to sleep sir")
+        speak("Time to sleep sir.")
+    speak("Welcome back sir. How may I help you?")
 
-wishme()
-
+# Function to tell the current time
 def time():
-    Time=datetime.datetime.now().strftime("%I:%M:%S")
-    speak(Time)
+    current_time = datetime.datetime.now().strftime("%I:%M:%S")
+    speak(f"Current time is {current_time}.")
 
+# Function to tell the current date
 def date():
-    year= str(datetime.datetime.now().year)
-    month= str(datetime.datetime.now().month)
-    date= str(datetime.datetime.now().day)
-    speak(date)
-    speak(month)
-    speak(year)
+    year = str(datetime.datetime.now().year)
+    month = str(datetime.datetime.now().month)
+    day = str(datetime.datetime.now().day)
+    speak(f"Today is {day} {month} {year}.")
 
-
-def wishme():
-    speak("welcome back sir. How may i help you")
-    
-# Speech Recognition
+# Function to take commands from the user
 def takeCommand():
-    r= sr.Recognizer()
+    r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("listening...")
-        speak("listening")
-        r.pause_threshold=1
-        voice =r.listen(source)
+        prt('Listning...')
+        r.pause_threshold = 1
+        voice = r.listen(source)
     try:
-        print("recongnizning...")
-        speak("recongnizning...")
+        prt('Recognizing...')
         query = r.recognize_google(voice, language="en-in")
-        
-        if 'stop'in query:
-            exit(0)
-
+        print(f"User said: {query.lower()}")
+        return query.lower()
     except Exception as e:
         print(e)
-        speak("Master! please repeat again....")
-
+        
         return "none"
-    return query
 
-time()
-date()
-wishme()
-# 
-# run for main file only
+# Main program
 if __name__ == '__main__':
+    wishme()
     while True:
-          query= takeCommand().lower()
-          print(takeCommand().lower())  
+        query = takeCommand()
 
-          if 'time' in query:
-              time()
-          elif 'date' in query:
-              date()
-          elif 'wikipedia' in query:
-            speak("searching")
-            query= query.replace("wikipedia","")
-            result= wikipedia.summary(query, sentences = 2)
+        if 'time' in query:
+            time()
+        elif 'date' in query:
+            date()
+        elif 'wikipedia' in query:
+            speak("Searching Wikipedia...")
+            query = query.replace("wikipedia", "")
+            result = wikipedia.summary(query, sentences=2)
             print(result)
             speak(result)
-          elif 'chrome' in query:
-            speak("Master! what should I search?")
-            brpath="C:\Program Files\Google\Chrome\Application\chrome.exe %s"
-            search=takeCommand().lower()
-            wb.get(brpath).open_new_tab(search+".com")
-          elif 'sleep' in query:
-              quit()
-
-
-
+        elif 'chrome' in query:
+            speak("What should I search for in Chrome?")
+            print("What should I search for in Chrome?")
+            search_query = takeCommand()
+            search_url = f"https://www.google.com/search?q={search_query}"
+            
+            # Use the default web browser to search (works if Chrome is the default browser)
+            # wb.open(search_url)
+            # If you want to explicitly use Chrome, use the correct path in raw string format
+            chrome_path = r' C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe %s'
+            webbrowser.get(chrome_path).open(search_url)
+        elif 'stop' in query:
+            speak("Goodbye!")
+            break
